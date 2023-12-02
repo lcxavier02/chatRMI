@@ -17,12 +17,12 @@ public class Server extends UnicastRemoteObject implements Service {
     @Override
     public void registerClient(CallbackC client, String username) throws RemoteException {
         clients.put(username, client);
-        broadcastMessage(username + " has joined the chat.");
+        broadcastMessage(username + " has joined the chat. ");
     }
 
     private String getClientUsername(CallbackC client) throws RemoteException {
-    return client.getUsername();
-}
+        return client.getUsername();
+    }
 
     @Override
     public void unregisterClient(CallbackC client) throws RemoteException {
@@ -47,32 +47,14 @@ public class Server extends UnicastRemoteObject implements Service {
     }
     
     public void connection(String Ip){
-            try {
-                Service chatService = new Server();
+        try {
+            Service chatService = new Server();
 
-                LocateRegistry.createRegistry(9000);
+            LocateRegistry.createRegistry(9000);
                 
-                java.rmi.Naming.rebind("rmi://"+Ip+":9000/ChatService", chatService);
- 
-                System.out.println("Chat server ready.");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-    }
-    
-
-    public static void main(String[] args) {
-            try {
-                Service chatService = new Server();
-
-                LocateRegistry.createRegistry(9000);
-
-                java.rmi.Naming.rebind("rmi://localhost:9000/ChatService", chatService);
-                
-                System.out.println("Chat server ready.");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            java.rmi.Naming.rebind("//"+Ip+":9000/ChatService", chatService);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

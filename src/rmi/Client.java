@@ -10,14 +10,13 @@ public class Client {
     
     public void startClient(String username, JTextArea jTextArea, String ip){
         try {
-            String serverUrl = "rmi://"+ip+":9000/ChatService";
+            String serverUrl = "//"+ip+":9000/ChatService";
 
             
             chatService = (Service) Naming.lookup(serverUrl);
 
             CallbackProps clientCallback = new CallbackProps(username, jTextArea);
             chatService.registerClient(clientCallback, username);
-
 
         } catch (Exception e) {
             e.printStackTrace();

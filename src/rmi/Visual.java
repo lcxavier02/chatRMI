@@ -35,6 +35,7 @@ public class Visual extends javax.swing.JFrame {
         lblEnviarMsj = new javax.swing.JLabel();
         pnlSendPrivMsg = new javax.swing.JPanel();
         lblEnviarMsjPriv = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -159,9 +160,7 @@ public class Visual extends javax.swing.JFrame {
         pnlSendMsg.setLayout(pnlSendMsgLayout);
         pnlSendMsgLayout.setHorizontalGroup(
             pnlSendMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSendMsgLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblEnviarMsj, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblEnviarMsj, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
         );
         pnlSendMsgLayout.setVerticalGroup(
             pnlSendMsgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +169,7 @@ public class Visual extends javax.swing.JFrame {
                 .addComponent(lblEnviarMsj, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(pnlSendMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 400, 150, 30));
+        jPanel1.add(pnlSendMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 400, 170, 30));
 
         pnlSendPrivMsg.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -202,6 +201,11 @@ public class Visual extends javax.swing.JFrame {
 
         jPanel1.add(pnlSendPrivMsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, 170, 30));
 
+        jLabel1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Write a message:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 130, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,7 +221,7 @@ public class Visual extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMensajeActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtMensajeActionPerformed
 
     private void lblActServerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblActServerKeyPressed
@@ -225,12 +229,11 @@ public class Visual extends javax.swing.JFrame {
     }//GEN-LAST:event_lblActServerKeyPressed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void lblActServerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblActServerMouseClicked
-        String Ip=JOptionPane.showInputDialog(rootPane, "Your IP", "Server", HEIGHT);
-        System.out.println(Ip);
+        String Ip=JOptionPane.showInputDialog(null, "Your IP", "Server", JOptionPane.PLAIN_MESSAGE);
         chatServer.connection(Ip);
         
         jTextArea1.append("Server connected.");
@@ -246,23 +249,21 @@ public class Visual extends javax.swing.JFrame {
         pnlActServer.setVisible(false);
         pnlSendMsg.setVisible(false);
         pnlSendPrivMsg.setVisible(false);
+        jLabel1.setVisible(false);
         
         whoIs.setText("Server");
     }//GEN-LAST:event_lblActServerMouseClicked
 
     private void lblActCientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblActCientMouseClicked
         if(idClient<5){
-            String Ip=JOptionPane.showInputDialog(rootPane, "Server IP", "Client", HEIGHT);
-            username=JOptionPane.showInputDialog(rootPane, "Username", "Client", HEIGHT);
-
-            System.out.println(Ip);
+            String Ip=JOptionPane.showInputDialog(null, "Server IP", "Client", JOptionPane.PLAIN_MESSAGE);
+            username=JOptionPane.showInputDialog(null, "Username", "Client", JOptionPane.PLAIN_MESSAGE);
             
             chatClient=new Client();
             chatClient.startClient(username, jTextArea1,Ip);
             
             idClient++;
             jTextArea1.append("Connected to server. ");
-            System.out.println(idClient);
             whoIs.setText(username);
         }
         
@@ -287,7 +288,7 @@ public class Visual extends javax.swing.JFrame {
     private void lblEnviarMsjPrivMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnviarMsjPrivMouseClicked
         if(!txtMensaje.getText().isEmpty()){
 
-            String privateUser=JOptionPane.showInputDialog(rootPane, "Write username to send private message", "Client", HEIGHT);
+            String privateUser=JOptionPane.showInputDialog(rootPane, "Write username to send a private message", "Client", JOptionPane.PLAIN_MESSAGE);
             try {
                 chatClient.sendPrivate(username, privateUser, txtMensaje.getText());
                 cleanTxt();
@@ -341,6 +342,7 @@ public class Visual extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
